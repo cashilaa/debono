@@ -1,94 +1,80 @@
 default_model:
-  model: claude-3-opus-20240229
-  temperature: 1
-  max_output_tokens: 300
+  model: text-davinci-003
+  temperature: 0.7
+  max_tokens: 300
 
 # De Bono's Six Thinking Hats flow
 flow:
 
   # The white hat focuses on the available information and facts about the problem.
   white_hat:
-    action: prompt
+    action: input
     prompt:
       - role: system
-        text: You are a helpful assistant, who is REALLY concise.
+        text: "Think like a helpful assistant, and be VERY concise."
       - role: user
       - heading: Problem
         var: query
       - text: |
-          List all the factual information you know about the problem. 
-          What data and numbers are available? 
-          Identify any gaps in your knowledge and consider how you might obtain this missing information.
-          Be VERY concise. Couple of sentences at most.
+          List all the factual information and data you know about the problem. 
+          Identify any gaps in your knowledge and consider how to obtain this missing information.
 
   # The red hat explores emotions, feelings, and intuitions about the problem.
   red_hat:
-    action: prompt
+    action: input
     prompt:
       - role: system
-        text: You are a helpful assistant, who is REALLY concise.
+        text: "Think like a helpful assistant, and be VERY concise."
       - role: user
       - heading: Problem
         var: query
       - text: |
-          Express your feelings and intuitions about the problem without any need to justify them.
-          What are your initial reactions? 
-          How do you and others feel about the situation?
-          Be VERY concise. Couple of sentences at most.
+          Express your feelings and intuitions about the problem without needing to justify them.
 
   # The black hat considers the risks, obstacles, and potential downsides of the problem.
   black_hat:
-    action: prompt
+    action: input
     prompt:
       - role: system
-        text: You are a helpful assistant, who is REALLY concise.
+        text: "Think like a helpful assistant, and be VERY concise."
       - role: user
       - heading: Problem
         var: query
       - text: |
-          Consider the risks and challenges associated with the problem. 
-          What are the potential downsides? 
-          Try to think critically about the obstacles, and the worst-case scenarios.
-          Be VERY concise. Couple of sentences at most.
+          Consider the risks, obstacles, and potential downsides associated with the problem.
 
   # The yellow hat focuses on the positive aspects, benefits, and opportunities of the problem.
   yellow_hat:
-    action: prompt
+    action: input
     prompt:
       - role: system
-        text: You are a helpful assistant, who is REALLY concise.
+        text: "Think like a helpful assistant, and be VERY concise."
       - role: user
       - heading: Problem
         var: query
       - text: |
-          Focus on the positives and the potential benefits of solving the problem. 
-          What are the best possible outcomes? 
-          How can this situation be an opportunity for growth or improvement?
-          Be VERY concise. Couple of sentences at most.
+          Focus on the positive aspects, benefits, and opportunities of solving the problem.
 
   # The green hat generates creative ideas, alternatives, and innovative solutions to the problem.
   green_hat:
-    action: prompt
+    action: input
     prompt:
       - role: system
-        text: You are a helpful assistant, who is REALLY concise.
+        text: "Think like a helpful assistant, and be VERY concise."
       - role: user
       - heading: Problem
         var: query
       - text: |
-          Think creatively about the problem. 
-          Brainstorm new ideas and alternative solutions. 
-          How can you overcome the identified challenges in an innovative way?
-          Be VERY concise. Couple of sentences at most.
+          Brainstorm creative ideas, alternatives, and innovative solutions to the problem.
 
   # The blue hat manages the thinking process, synthesizes insights, and outlines a plan of action.
   blue_hat:
-    action: prompt
+    action: input
     model:
-      max_output_tokens: 1000
+      max_tokens: 1000
     prompt:
       - role: system
-        text: You are a helpful assistant, who is REALLY concise.
+        text: "Think like a helpful assistant, and be VERY concise."
       - role: user
       - heading: Problem
         var: query
@@ -103,23 +89,16 @@ flow:
       - heading: Green Hat
         link: green_hat.result
       - text: |
-          Review and synthesize the information and ideas generated from the other hats. 
-          Assess which ideas are most feasible and effective based on the facts (White Hat), emotions (Red Hat), risks (Black Hat), benefits (Yellow Hat), and creative solutions (Green Hat). 
-          How can these insights be integrated into a coherent strategy? 
-          Outline a plan with clear steps or actions, indicating responsibilities, deadlines, and milestones. 
-          Consider how you will monitor progress and what criteria you will use to evaluate success.
+          Synthesize the information and ideas from the other hats. 
+          Outline a plan with clear steps, responsibilities, deadlines, and milestones.
 
   # Define "My Hat" section for custom perspective
   my_hat:
-    action: prompt
+    action: input
     prompt:
       - heading: Problem
         var: query
       - text: |
           Express your unique perspective or approach to the problem.
-          How do you personally view the situation? 
-          What insights or ideas do you bring that differ from the other hats?
-          Be VERY concise. Couple of sentences at most.
-    link: my_hat.result
 
 default_output: blue_hat.result
